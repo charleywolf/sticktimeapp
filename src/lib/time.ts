@@ -1,4 +1,4 @@
-import { addDays, isToday, isTomorrow, isYesterday } from "date-fns";
+import { addDays, format, isToday, isTomorrow, isYesterday } from "date-fns";
 
 import { formatInTimeZone } from "date-fns-tz";
 
@@ -47,7 +47,7 @@ export const TIMEZONE = "America/New_York";
 
 export function formatDate(date: Date): string {
   // Format date in YYYY-MM-DD format
-  const dateString = formatInTimeZone(date, TIMEZONE, "MM/dd/yyyy");
+  const dateString = format(date, "MM/dd/yyyy");
 
   // Check if the date is today, tomorrow, or yesterday
   if (isToday(dateString)) {
@@ -67,7 +67,7 @@ export function formatDate(date: Date): string {
 }
 
 export function formatTime(date: Date): string {
-  return formatInTimeZone(date, TIMEZONE, "hh:mm a");
+  return format(date, "hh:mm a");
 }
 
 export function formatDollars(amount: number): string {

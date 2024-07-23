@@ -7,10 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatDate, formatDollars, formatTime } from "@/lib/time";
 
+import ClientTime from "@/components/ClientTime";
 import Link from "next/link";
 import fetchSticktimes from "@/lib/fetch";
+import { formatDollars } from "@/lib/time";
 import rinkMap from "@/lib/rinkMap";
 
 export const revalidate = 3600;
@@ -18,7 +19,7 @@ export const revalidate = 3600;
 export default async function Home() {
   const sticktimes = await fetchSticktimes();
   return (
-    <main className="min-h-screen bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 flex-col flex gap-16 items-center justify-between py-24 px-8 sm:px-16 md:px-24">
+    <main className="min-h-screen bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 flex-col flex gap-16 items-center justify-between py-16 px-8 sm:px-16 md:p-24">
       <div className="flex flex-col gap-8 text-center sm:text-left">
         <h1 className="text-[#a4e6d0] font-bold text-4xl">SticktimeApp</h1>
         <p className="text-sm px-4 sm:px-0 sm:text-lg">
@@ -61,9 +62,9 @@ export default async function Home() {
                       {sticktime.rink}
                     </Link>
                   </TableCell>
-                  <TableCell>{formatDate(sticktime.start)}</TableCell>
-                  <TableCell>{formatTime(sticktime.start)}</TableCell>
-                  <TableCell>{formatTime(sticktime.end)}</TableCell>
+
+                  <ClientTime start={sticktime.start} end={sticktime.end} />
+
                   <TableCell className="text-right">
                     {formatDollars(sticktime.price)}
                   </TableCell>

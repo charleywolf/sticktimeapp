@@ -1,6 +1,7 @@
-import { getDateOneMonthFromNow, getTodaysDate } from "./time";
+import { TIMEZONE, getDateOneMonthFromNow, getTodaysDate } from "./time";
 
 import { Sticktime } from "./fetch";
+import { fromZonedTime } from "date-fns-tz";
 
 export default async function wsa(): Promise<Sticktime[]> {
   const pageLength = process.env.NODE_ENV === "development" ? 50 : 500;
@@ -28,8 +29,8 @@ export default async function wsa(): Promise<Sticktime[]> {
         element.attributes.name.includes("Time")
       ) {
         return {
-          start: new Date(event.attributes.start),
-          end: new Date(event.attributes.end),
+          start: fromZonedTime(event.attributes.start, TIMEZONE),
+          end: fromZonedTime(event.attributes.end, TIMEZONE),
           rink: "WSA",
           price: 25,
         };
