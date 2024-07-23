@@ -9,7 +9,8 @@ import {
 } from "@/components/ui/table";
 
 import ClientTime from "@/components/ClientTime";
-import Link from "next/link";
+import OnlineRegistration from "@/components/OnlineRegistration";
+import clsx from "clsx";
 import fetchSticktimes from "@/lib/fetch";
 import { formatDollars } from "@/lib/time";
 import rinkMap from "@/lib/rinkMap";
@@ -58,15 +59,18 @@ export default async function Home() {
                     sticktime.end.toDateString()
                   }
                 >
-                  <TableCell className={rink.style}>
+                  <TableCell
+                    className={clsx(rink.style, "flex gap-2 items-center")}
+                  >
                     <a
                       href={rink.href}
                       target="_blank"
                       referrerPolicy="no-referrer"
-                      className="font-semibold underline hover:no-underline"
+                      className="font-semibold flex underline hover:no-underline"
                     >
                       {sticktime.rink}
                     </a>
+                    {rink.onlineRegistration && <OnlineRegistration />}
                   </TableCell>
 
                   <ClientTime start={sticktime.start} end={sticktime.end} />

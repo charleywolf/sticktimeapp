@@ -21,6 +21,7 @@ Some reverse engineering may be required.
 - [x] Brewster Ice Arena
 - [x] Stamford Twin Rinks
 - [ ] Terry Conners Rink
-- [ ] EJ Murray Memorial Skating Center
 - [ ] Hommocks Park Ice Rink
+- [ ] EJ Murray Memorial Skating Center
 - [ ] Playland Ice Casino
+- [ ] Ebersole Ice Rink
