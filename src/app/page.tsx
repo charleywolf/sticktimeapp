@@ -21,7 +21,7 @@ export default async function Home() {
     <main className="min-h-screen bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 flex-col flex gap-16 items-center justify-between py-24 px-8 sm:px-16 md:px-24">
       <div className="flex flex-col gap-8 text-center sm:text-left">
         <h1 className="text-[#a4e6d0] font-bold text-4xl">SticktimeApp</h1>
-        <p className="text-sm px-4">
+        <p className="text-sm px-4 sm:px-0">
           Discover and access a comprehensive list of local stick times in the
           Greater Westchester area. Our platform consolidates schedules and
           availability, making it easy to find your preferred ice time in one
