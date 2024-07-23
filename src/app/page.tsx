@@ -42,12 +42,11 @@ export default async function Home() {
                   sticktime.start.toDateString() +
                   sticktime.end.toDateString()
                 }
-                className={rink.bg}
               >
-                <TableCell className="font-medium">
+                <TableCell className={rink.style}>
                   <Link
                     href={rink.href}
-                    className="text-blue-600 hover:text-blue-500"
+                    className="font-semibold underline hover:no-underline"
                   >
                     {sticktime.rink}
                   </Link>

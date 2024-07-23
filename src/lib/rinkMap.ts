@@ -5,17 +5,17 @@ export default function rinkMap(rink: Rink) {
     case "Ice Hutch":
       return {
         href: "https://www.icehutch.com/",
-        bg: "bg-red-50",
+        style: "text-red-600",
       };
     case "WSA":
       return {
         href: "https://www.skatewsa.com/page/show/6116225-sticktime",
-        bg: "bg-green-50",
+        style: "text-green-600",
       };
     default:
       return {
         href: "https://www.google.com/search?q=" + rink,
-        bg: "",
+        style: "",
       };
   }
 }
