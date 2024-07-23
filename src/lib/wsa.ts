@@ -1,10 +1,9 @@
+import { Sticktime, pageLength } from "./fetch";
 import { TIMEZONE, getDateOneMonthFromNow, getTodaysDate } from "./time";
 
-import { Sticktime } from "./fetch";
 import { fromZonedTime } from "date-fns-tz";
 
 export default async function wsa(): Promise<Sticktime[]> {
-  const pageLength = process.env.NODE_ENV === "development" ? 50 : 500;
   const result = await fetch(
     `https://apps.daysmartrecreation.com/dash/jsonapi/api/v1/events?cache[save]=false&page[size]=${pageLength}&sort=start&company=wsa&filter[start__gte]=${getTodaysDate()}%2000%3A00%3A00&filter[start__lte]=${getDateOneMonthFromNow()}%2023%3A59%3A59&filter[resource.facility.my_sam_visible]=true&filter[eventType.code__not]=L&filter[eventType.id]=3&filter[resource.facility.id]=1&filterRelations[comments.comment_type]=public&include=homeTeam.league.programType%2CvisitingTeam.league.programType%2Csummary%2Cresource.facility%2CresourceArea%2Ccomments%2CeventType`,
     {

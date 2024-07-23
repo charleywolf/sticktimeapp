@@ -1,7 +1,10 @@
+import brewster from "./brewster";
 import icehutch from "./icehutch";
 import wsa from "./wsa";
 
-export type Rink = "Ice Hutch" | "WSA";
+export type Rink = "Ice Hutch" | "WSA" | "Brewster";
+
+export const pageLength = process.env.NODE_ENV === "development" ? 50 : 500; // DaySmart Recreation API
 export interface Sticktime {
   start: Date;
   end: Date;
@@ -23,7 +26,11 @@ export interface Sticktime {
  * @returns {Promise<Sticktime[]>}
  */
 export default async function fetchSticktimes(): Promise<Sticktime[]> {
-  const sticktimes = [...(await icehutch()), ...(await wsa())];
+  const sticktimes = [
+    ...(await icehutch()),
+    ...(await wsa()),
+    ...(await brewster()),
+  ];
 
   return sticktimes.sort((a, b) => a.start.getTime() - b.start.getTime());
 }
