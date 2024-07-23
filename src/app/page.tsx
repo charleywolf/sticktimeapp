@@ -3,14 +3,17 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { formatDate, formatDollars, formatTime } from "@/lib/time";
 
+import Link from "next/link";
 import fetchSticktimes from "@/lib/fetch";
+import rinkMap from "@/lib/rinkMap";
+
+export const revalidate = 3600;
 
 export default async function Home() {
   const sticktimes = await fetchSticktimes();
@@ -30,23 +33,34 @@ export default async function Home() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sticktimes.map((sticktime) => (
-            <TableRow
-              key={
-                sticktime.rink +
-                sticktime.start.toDateString() +
-                sticktime.end.toDateString()
-              }
-            >
-              <TableCell className="font-medium">{sticktime.rink}</TableCell>
-              <TableCell>{formatDate(sticktime.start)}</TableCell>
-              <TableCell>{formatTime(sticktime.start)}</TableCell>
-              <TableCell>{formatTime(sticktime.end)}</TableCell>
-              <TableCell className="text-right">
-                {formatDollars(sticktime.price)}
-              </TableCell>
-            </TableRow>
-          ))}
+          {sticktimes.map((sticktime) => {
+            const rink = rinkMap(sticktime.rink);
+            return (
+              <TableRow
+                key={
+                  sticktime.rink +
+                  sticktime.start.toDateString() +
+                  sticktime.end.toDateString()
+                }
+                className={rink.bg}
+              >
+                <TableCell className="font-medium">
+                  <Link
+                    href={rink.href}
+                    className="text-blue-600 hover:text-blue-500"
+                  >
+                    {sticktime.rink}
+                  </Link>
+                </TableCell>
+                <TableCell>{formatDate(sticktime.start)}</TableCell>
+                <TableCell>{formatTime(sticktime.start)}</TableCell>
+                <TableCell>{formatTime(sticktime.end)}</TableCell>
+                <TableCell className="text-right">
+                  {formatDollars(sticktime.price)}
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </main>

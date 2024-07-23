@@ -1,9 +1,11 @@
 import icehutch from "./icehutch";
+import wsa from "./wsa";
 
+export type Rink = "Ice Hutch" | "WSA";
 export interface Sticktime {
   start: Date;
   end: Date;
-  rink: "Ice Hutch";
+  rink: Rink;
   price: number;
 }
 
@@ -21,7 +23,7 @@ export interface Sticktime {
  * @returns {Promise<Sticktime[]>}
  */
 export default async function fetchSticktimes(): Promise<Sticktime[]> {
-  const sticktimes = [...(await icehutch())];
+  const sticktimes = [...(await icehutch()), ...(await wsa())];
 
   return sticktimes.sort((a, b) => a.start.getTime() - b.start.getTime());
 }

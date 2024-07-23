@@ -1,14 +1,38 @@
-import { format, isToday, isTomorrow, isYesterday } from "date-fns";
+import { addDays, isToday, isTomorrow, isYesterday } from "date-fns";
 
 import { formatInTimeZone } from "date-fns-tz";
 
-// YYYY-MM-DD
 export function getTodaysDate(): string {
-  const today = new Date();
+  const now = new Date();
 
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
+  return formatInTimeZone(now, TIMEZONE, "yyyy-MM-dd"); // Convert the date back to the original time zone
+}
+
+export function getTomorrowsDate(): string {
+  const now = new Date();
+  const zonedDate = formatInTimeZone(now, TIMEZONE, "yyyy-MM-dd"); // Convert current date to the specified time zone
+  const tomorrow = addDays(zonedDate, 1); // Add one day
+
+  return formatInTimeZone(tomorrow, TIMEZONE, "yyyy-MM-dd"); // Convert the date back to the original time zone
+}
+
+export function getDateOneMonthFromNow(): string {
+  const today = new Date();
+  const nextMonth = new Date(
+    today.getFullYear(),
+    today.getMonth() + 1,
+    today.getDate()
+  );
+
+  // Check if the date is invalid (e.g., April 31st)
+  if (nextMonth.getMonth() !== (today.getMonth() + 1) % 12) {
+    // If invalid, set the date to the last day of the month
+    nextMonth.setDate(0);
+  }
+
+  const year = nextMonth.getFullYear();
+  const month = String(nextMonth.getMonth() + 1).padStart(2, "0");
+  const day = String(nextMonth.getDate()).padStart(2, "0");
 
   return `${year}-${month}-${day}`;
 }
@@ -23,7 +47,7 @@ export const TIMEZONE = "America/New_York";
 
 export function formatDate(date: Date): string {
   // Format date in YYYY-MM-DD format
-  const dateString = formatInTimeZone(date, TIMEZONE, "yyyy-MM-dd");
+  const dateString = formatInTimeZone(date, TIMEZONE, "MM/dd/yyyy");
 
   // Check if the date is today, tomorrow, or yesterday
   if (isToday(dateString)) {
