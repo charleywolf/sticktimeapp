@@ -21,5 +21,7 @@ export interface Sticktime {
  * @returns {Promise<Sticktime[]>}
  */
 export default async function fetchSticktimes(): Promise<Sticktime[]> {
-  return await icehutch();
+  const sticktimes = [...(await icehutch())];
+
+  return sticktimes.sort((a, b) => a.start.getTime() - b.start.getTime());
 }

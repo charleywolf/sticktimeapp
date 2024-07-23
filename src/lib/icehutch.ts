@@ -17,7 +17,7 @@ export default async function icehutch(): Promise<Sticktime[]> {
   const events = await result.json();
 
   const sticktimes: (Sticktime | null)[] = events.items.map((event: any) => {
-    if (event.summary.trim() === "Stick Time" && event.status === "confirmed")
+    if (event.summary.trim() === "Stick Time")
       return {
         price: 25,
         rink: "Ice Hutch",
