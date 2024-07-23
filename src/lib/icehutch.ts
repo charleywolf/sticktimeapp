@@ -20,7 +20,7 @@ export default async function icehutch(): Promise<Sticktime[]> {
     if (event.summary.trim() === "Stick Time" && event.status === "confirmed")
       return {
         price: 25,
-        location: "Ice Hutch",
+        rink: "Ice Hutch",
         start: new Date(event.start.dateTime),
         end: new Date(event.end.dateTime),
       };
