@@ -42,7 +42,5 @@ export default async function wsa(): Promise<Sticktime[]> {
     }
   });
 
-  console.log(sticktimes.filter((sticktime) => sticktime !== null));
-
   return sticktimes.filter((sticktime) => sticktime !== null);
 }
