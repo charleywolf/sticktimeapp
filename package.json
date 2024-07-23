@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "env TZ=UTC next dev",
     "build": "next build",
-    "start": "next start && set TZ=UTC",
+    "start": "env TZ=UTC next start",
     "lint": "next lint"
   },
   "dependencies": {

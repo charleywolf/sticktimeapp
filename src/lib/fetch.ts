@@ -1,8 +1,9 @@
 import brewster from "./brewster";
 import icehutch from "./icehutch";
+import twinrinks from "./twinrinks";
 import wsa from "./wsa";
 
-export type Rink = "Ice Hutch" | "WSA" | "Brewster";
+export type Rink = "Ice Hutch" | "WSA" | "Brewster" | "Twin Rinks";
 
 export const pageLength = process.env.NODE_ENV === "development" ? 50 : 500; // DaySmart Recreation API
 export interface Sticktime {
@@ -30,6 +31,7 @@ export default async function fetchSticktimes(): Promise<Sticktime[]> {
     ...(await icehutch()),
     ...(await wsa()),
     ...(await brewster()),
+    ...(await twinrinks()),
   ];
 
   return sticktimes.sort((a, b) => a.start.getTime() - b.start.getTime());

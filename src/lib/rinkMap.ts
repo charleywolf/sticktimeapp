@@ -17,6 +17,11 @@ export default function rinkMap(rink: Rink) {
         href: "https://brewstericearena.com/seasonal-schedule",
         style: "text-blue-300",
       };
+    case "Twin Rinks":
+      return {
+        href: "https://stamfordtwinrinks.com/hockey/stick-puck",
+        style: "text-cyan-300",
+      };
     default:
       return {
         href: "https://www.google.com/search?q=" + rink,

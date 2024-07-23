@@ -18,9 +18,9 @@ Some reverse engineering may be required.
 
 - [x] Ice Hutch
 - [x] Westchester Skating Academy
-- [ ] Stamford Twin Rinks
+- [x] Brewster Ice Arena
+- [x] Stamford Twin Rinks
 - [ ] Terry Conners Rink
-- [ ] Brewster Ice Arena
 - [ ] EJ Murray Memorial Skating Center
 - [ ] Hommocks Park Ice Rink
 - [ ] Playland Ice Casino
