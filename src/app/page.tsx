@@ -24,9 +24,13 @@ export default async function Home() {
         <h1 className="text-[#a4e6d0] font-bold text-4xl">SticktimeApp</h1>
         <p className="text-sm px-4 sm:px-0 sm:text-lg">
           Discover and access a comprehensive list of local stick times in the
-          Greater Westchester area. Our platform consolidates schedules and
-          availability, making it easy to find your preferred ice time in one
-          convenient location.
+          Greater Westchester area. No more searching through multiple websites
+          to find a stick time that works for you.{" "}
+        </p>
+        <p className="italic text-xs px-4 sm:px-0">
+          We do not guarantee the validity of this data. Always verify on the
+          rink&apos;s website that the sticktime is available and if there are
+          any booking requirements.
         </p>
       </div>
       <section className="p-3 bg-neutral-900 border-4 rounded-xl w-full">
