@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "SticktimeApp",
   description:
-    "Discover and access a comprehensive list of local stick times in the Greater Westchester area. Our platform consolidates schedules and availability, making it easy to find and book your preferred ice time in one convenient location.",
+    "Discover and access a comprehensive list of local stick times in the Greater Westchester area. Our platform consolidates schedules and availability, making it easy to find your preferred ice time in one convenient location.",
 };
 
 export default function RootLayout({
