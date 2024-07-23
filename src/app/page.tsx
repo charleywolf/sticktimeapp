@@ -55,12 +55,14 @@ export default async function Home() {
                   }
                 >
                   <TableCell className={rink.style}>
-                    <Link
+                    <a
                       href={rink.href}
+                      target="_blank"
+                      referrerPolicy="no-referrer"
                       className="font-semibold underline hover:no-underline"
                     >
                       {sticktime.rink}
-                    </Link>
+                    </a>
                   </TableCell>
 
                   <ClientTime start={sticktime.start} end={sticktime.end} />
