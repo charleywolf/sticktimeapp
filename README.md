@@ -1,6 +1,6 @@
 # SticktimeApp
 
-Created for the local NY hockey area (mainly Westchester); basic Next.js app that lists open ice at multiple rinks.
+A web app that aggregates open ice for local NY/CT hockey players.
 
 This may break from time to time as rinks change their sites and APIs. Please make an issue if you notice that happen, I will try to keep this repo up-to-date.
 
