@@ -84,7 +84,10 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="flex w-full items-center gap-2" variant="outline">
+          <Button
+            className="flex w-full items-center gap-2 border-4"
+            variant="outline"
+          >
             <FilterIcon className="h-4 w-4" /> Filter Rinks
           </Button>
         </DropdownMenuTrigger>
