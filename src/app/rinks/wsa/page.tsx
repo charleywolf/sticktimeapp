@@ -9,6 +9,7 @@ export default function RinkPage() {
       equipmentRequired="Full Equipment"
       onlineRegistration="Recommended"
       skaterLimit={30}
+      stars={1}
       rules={["No Scrimmages/Games (Enforced)", "No Slapshots"]}
     />
   );
