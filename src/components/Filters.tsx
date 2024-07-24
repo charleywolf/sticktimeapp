@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Rink, Sticktime, rinks } from "@/lib/fetch";
 import { TableCell, TableRow } from "./ui/table";
+import { isBefore, startOfDay } from "date-fns";
 import { useEffect, useState } from "react";
 
 import { Button } from "./ui/button";
@@ -32,7 +33,10 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
     const rows = sticktimes.map((sticktime) => {
       const rink = rinkMap(sticktime.rink); // additional rink data
 
-      if (!disabledRinks.includes(sticktime.rink)) {
+      if (
+        !disabledRinks.includes(sticktime.rink) &&
+        !isBefore(sticktime.start, startOfDay(new Date()))
+      ) {
         count++;
 
         return (
