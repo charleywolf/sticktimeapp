@@ -79,7 +79,9 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
 
   return (
     <>
-      <span className="text-xs text-neutral-300 pb-2">{count} results</span>
+      <span className="text-xs text-neutral-300 text-left w-full mt-8">
+        {count} results
+      </span>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
