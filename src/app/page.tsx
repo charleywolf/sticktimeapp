@@ -66,7 +66,7 @@ export default async function Home() {
                       href={rink.href}
                       target="_blank"
                       referrerPolicy="no-referrer"
-                      className="font-semibold flex underline hover:no-underline"
+                      className="font-semibold flex hover:opacity-80 underline"
                     >
                       {sticktime.rink}
                     </a>
