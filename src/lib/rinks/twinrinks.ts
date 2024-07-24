@@ -1,5 +1,5 @@
-import { Sticktime, pageLength } from "./fetch";
-import { getDateOneMonthFromNow, getTodaysDate } from "./time";
+import { Sticktime, pageLength } from "../fetch";
+import { getDateOneMonthFromNow, getTodaysDate } from "../utils/time";
 
 export default async function twinrinks(): Promise<Sticktime[]> {
   const result = await fetch(

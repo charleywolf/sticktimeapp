@@ -1,5 +1,5 @@
-import { Sticktime, pageLength } from "./fetch";
-import { TIMEZONE, getDateOneMonthFromNow, getTodaysDate } from "./time";
+import { Sticktime, pageLength } from "../fetch";
+import { TIMEZONE, getDateOneMonthFromNow, getTodaysDate } from "../utils/time";
 
 import { fromZonedTime } from "date-fns-tz";
 

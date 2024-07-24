@@ -1,7 +1,7 @@
-import brewster from "./brewster";
-import icehutch from "./icehutch";
-import twinrinks from "./twinrinks";
-import wsa from "./wsa";
+import brewster from "./rinks/brewster";
+import icehutch from "./rinks/icehutch";
+import twinrinks from "./rinks/twinrinks";
+import wsa from "./rinks/wsa";
 
 export const rinks: Rink[] = ["Ice Hutch", "WSA", "Brewster", "Twin Rinks"];
 export type Rink = "Ice Hutch" | "WSA" | "Brewster" | "Twin Rinks";

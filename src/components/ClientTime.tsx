@@ -1,6 +1,6 @@
 "use client";
 
-import { formatDate, formatTime } from "@/lib/time";
+import { formatDate, formatTime } from "@/lib/utils/time";
 import { useEffect, useState } from "react";
 
 import { TableCell } from "./ui/table";

@@ -4,7 +4,6 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -19,7 +18,7 @@ import { FilterIcon } from "lucide-react";
 import OnlineRegistration from "@/components/OnlineRegistration";
 import TableWrapper from "./TableWrapper";
 import clsx from "clsx";
-import { formatDollars } from "@/lib/time";
+import { formatDollars } from "@/lib/utils/time";
 import rinkMap from "@/lib/rinkMap";
 
 export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {

@@ -1,6 +1,6 @@
-import { TIMEZONE, getDateOneMonthFromNow, getTodaysDate } from "./time";
+import { TIMEZONE, getDateOneMonthFromNow, getTodaysDate } from "../utils/time";
 
-import { Sticktime } from "./fetch";
+import { Sticktime } from "../fetch";
 import { fromZonedTime } from "date-fns-tz";
 
 export default async function wsa(): Promise<Sticktime[]> {

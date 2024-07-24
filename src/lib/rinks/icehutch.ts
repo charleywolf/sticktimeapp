@@ -1,8 +1,8 @@
 // price is 25.00
 
-import { getTodaysDate, isMoreThanAMonthFromNow } from "./time";
+import { getTodaysDate, isMoreThanAMonthFromNow } from "../utils/time";
 
-import { Sticktime } from "./fetch";
+import { Sticktime } from "../fetch";
 
 export default async function icehutch(): Promise<Sticktime[]> {
   const result = await fetch(
