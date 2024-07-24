@@ -3,6 +3,7 @@ import icehutch from "./icehutch";
 import twinrinks from "./twinrinks";
 import wsa from "./wsa";
 
+export const rinks: Rink[] = ["Ice Hutch", "WSA", "Brewster", "Twin Rinks"];
 export type Rink = "Ice Hutch" | "WSA" | "Brewster" | "Twin Rinks";
 
 export const pageLength = process.env.NODE_ENV === "development" ? 50 : 500; // DaySmart Recreation API
