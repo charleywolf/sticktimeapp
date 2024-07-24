@@ -75,13 +75,11 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
     } else {
       setDisabledRinks((prev) => prev.filter((prevRink) => prevRink !== rink));
     }
-
-    console.log(disabledRinks);
   };
 
   return (
     <>
-      <span className="text-xs text-neutral-300 py-2">{count} results</span>
+      <span className="text-xs text-neutral-300 pb-2">{count} results</span>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
