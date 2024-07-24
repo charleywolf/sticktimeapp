@@ -1,5 +1,6 @@
 import "./globals.css";
 
+import Counter from "@/components/Counter";
 import Footer from "@/components/Footer";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
@@ -23,13 +24,14 @@ export default function RootLayout({
       <body
         className={clsx(
           inter.className,
-          "min-h-screen",
+          "min-h-screen flex flex-col",
           "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900"
         )}
       >
         {children}
 
         <Footer />
+        <Counter />
       </body>
     </html>
   );

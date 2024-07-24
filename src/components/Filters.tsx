@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import ClientTime from "@/components/ClientTime";
 import { FilterIcon } from "lucide-react";
+import Link from "next/link";
 import OnlineRegistration from "@/components/OnlineRegistration";
 import TableWrapper from "./TableWrapper";
 import clsx from "clsx";
@@ -43,14 +44,13 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
             }
           >
             <TableCell className={clsx(rink.style, "flex gap-2 items-center")}>
-              <a
+              <Link
                 href={rink.href}
                 target="_blank"
-                referrerPolicy="no-referrer"
                 className="font-semibold flex hover:opacity-80 underline"
               >
                 {sticktime.rink}
-              </a>
+              </Link>
               {rink.onlineRegistration && <OnlineRegistration />}
             </TableCell>
 

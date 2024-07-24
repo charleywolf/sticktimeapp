@@ -67,3 +67,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+#rink-content h2 {
+  @apply text-xl py-1 font-semibold;
+}
