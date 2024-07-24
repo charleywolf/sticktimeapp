@@ -3,6 +3,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
+import clsx from "clsx";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +20,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>
+      <body
+        className={clsx(
+          inter.className,
+          "min-h-screen",
+          "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900"
+        )}
+      >
         {children}
+
         <Footer />
       </body>
     </html>

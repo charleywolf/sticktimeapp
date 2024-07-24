@@ -79,7 +79,7 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
 
   return (
     <>
-      <span className="text-xs text-neutral-300 text-left w-full mt-8">
+      <span className="text-xs text-neutral-300 text-left w-full mt-8 sm:mt-0">
         {count} results
       </span>
 

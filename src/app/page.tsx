@@ -6,7 +6,7 @@ export const revalidate = 3600;
 export default async function Home() {
   const sticktimes = await fetchSticktimes();
   return (
-    <main className="min-h-screen bg-gradient-to-r gap-8 from-slate-900 via-slate-800 to-slate-900 flex-col flex items-center justify-between py-16 px-8 sm:px-16 md:p-24">
+    <main className="gap-8 flex-col flex items-center justify-between py-16 px-8 sm:px-16 md:p-24">
       <h1 className="text-[#a4e6d0] font-bold text-4xl w-full text-center sm:text-left">
         SticktimeApp
       </h1>

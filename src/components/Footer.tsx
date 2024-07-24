@@ -1,3 +1,7 @@
 export default function Footer() {
-  return <div className="w-full bg-slate-900 mt-12 p-3 flex"></div>;
+  return (
+    <footer className="w-full px-24 py-8 bg-neutral-900 border-t-4 text-sm text-neutral-200 text-center h-full">
+      <p>&copy; 2024 Charley Wolf. All Rights Reserved.</p>
+    </footer>
+  );
 }
