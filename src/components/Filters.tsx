@@ -19,6 +19,7 @@ import { Button } from "./ui/button";
 import ClientTime from "@/components/ClientTime";
 import Link from "next/link";
 import OnlineRegistration from "@/components/OnlineRegistration";
+import { Skeleton } from "./ui/skeleton";
 import TableWrapper from "./TableWrapper";
 import clsx from "clsx";
 import { formatDollars } from "@/lib/utils/time";
@@ -92,6 +93,8 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
         }
 
         setRinkDistance(newRinkDistance);
+        toast.dismiss();
+        toast.success("Successfully calculated driving time to rinks!");
       };
 
       calculateCoordinates();
@@ -132,9 +135,15 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
 
             {location !== null && (
               <TableCell>
-                {rinkDistance[sticktime.rink] !== -1
-                  ? rinkDistance[sticktime.rink] + "m"
-                  : "Calculating..."}
+                {rinkDistance[sticktime.rink] !== -1 ? (
+                  <p>
+                    {rinkDistance[sticktime.rink]}
+                    <span className="lg:hidden">m</span>{" "}
+                    <span className="hidden lg:inline">minutes</span>
+                  </p>
+                ) : (
+                  <Skeleton className="w-full h-5" />
+                )}
               </TableCell>
             )}
 
@@ -165,7 +174,7 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
-        toast.success("Successfully enabled rink distance calculation!");
+        toast.loading("Calculating driving time to rinks...");
       },
       () => {
         toast.error("Please enable location access to use this feature.");
@@ -211,7 +220,7 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
           onClick={locationHandler}
           disabled={location !== null}
         >
-          <LocateIcon className="h-4 w-4" /> See Distance to Rinks
+          <LocateIcon className="h-4 w-4" /> See Driving Time to Rinks
         </Button>
       </div>
 

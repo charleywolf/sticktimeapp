@@ -26,7 +26,7 @@ export default function TableWrapper({
             <TableHead>Date</TableHead>
             <TableHead>Start Time</TableHead>
             <TableHead>End Time</TableHead>
-            {distanceEnabled && <TableHead>Distance</TableHead>}
+            {distanceEnabled && <TableHead>Driving Time</TableHead>}
             <TableHead className="text-right">Price</TableHead>
           </TableRow>
         </TableHeader>
