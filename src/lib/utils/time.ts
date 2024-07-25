@@ -63,7 +63,7 @@ export function formatDate(date: Date): string {
   }
 
   // If none of the above, return the formatted date
-  return dateString;
+  return `${dateString} (${format(date, "EEEE")})`;
 }
 
 export function formatTime(date: Date): string {
