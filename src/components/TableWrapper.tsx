@@ -9,8 +9,10 @@ import {
 
 export default function TableWrapper({
   children,
+  distanceEnabled,
 }: {
   children: React.ReactNode;
+  distanceEnabled: boolean;
 }) {
   return (
     <div className="bg-neutral-900 border-4 rounded-xl w-full p-3 flex">
@@ -24,6 +26,7 @@ export default function TableWrapper({
             <TableHead>Date</TableHead>
             <TableHead>Start Time</TableHead>
             <TableHead>End Time</TableHead>
+            {distanceEnabled && <TableHead>Distance</TableHead>}
             <TableHead className="text-right">Price</TableHead>
           </TableRow>
         </TableHeader>

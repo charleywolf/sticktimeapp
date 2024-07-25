@@ -4,6 +4,7 @@ import Counter from "@/components/Counter";
 import Footer from "@/components/Footer";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
+import { Toaster } from "@/components/ui/sonner";
 import clsx from "clsx";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -32,6 +33,7 @@ export default function RootLayout({
 
         <Footer />
         <Counter />
+        <Toaster />
       </body>
     </html>
   );
