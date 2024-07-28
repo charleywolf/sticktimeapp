@@ -71,3 +71,7 @@
 #rink-content h2 {
   @apply text-xl py-1 font-semibold;
 }
+
+:root {
+  color-scheme: dark;
+}

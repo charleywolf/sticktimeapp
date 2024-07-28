@@ -36,28 +36,30 @@ export default function TableWrapper({
       </h1>
       <div
         className={clsx(
-          "z-20 w-full p-3 flex",
+          "z-20 w-full flex",
           fullscreen
-            ? "absolute top-0 bottom-0 border-t-4 mt-16"
+            ? "absolute top-0 bottom-0 border-t-4 mt-16 overflow-scroll"
             : "rounded-xl border-4 bg-neutral-900"
         )}
       >
-        <Table>
-          <TableCaption className="sr-only">
-            A list of local sticktimes.
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Rink</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead>Start Time</TableHead>
-              <TableHead>End Time</TableHead>
-              {distanceEnabled && <TableHead>Driving Time</TableHead>}
-              <TableHead className="text-right">Price</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>{children}</TableBody>
-        </Table>
+        <div className="p-3 w-full">
+          <Table>
+            <TableCaption className="sr-only">
+              A list of local sticktimes.
+            </TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Rink</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Start Time</TableHead>
+                <TableHead>End Time</TableHead>
+                {distanceEnabled && <TableHead>Driving Time</TableHead>}
+                <TableHead className="text-right">Price</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>{children}</TableBody>
+          </Table>
+        </div>
       </div>
     </>
   );
