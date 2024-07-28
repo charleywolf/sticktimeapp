@@ -8,12 +8,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { FilterIcon, LocateIcon } from "lucide-react";
+import {
+  FilterIcon,
+  LocateIcon,
+  Minimize2Icon,
+  MoveUpRight,
+} from "lucide-react";
 import { Rink, Sticktime, rinks } from "@/lib/fetch";
 import { TableCell, TableRow } from "./ui/table";
 import { isBefore, startOfDay } from "date-fns";
 import rinkMap, { rinkData } from "@/lib/rinkMap";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "./ui/button";
 import ClientTime from "@/components/ClientTime";
@@ -182,6 +187,8 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
     );
   };
 
+  const [fullscreen, setFullscreen] = useState<boolean>(false);
+
   return (
     <>
       <span className="text-xs text-neutral-300 text-left w-full mt-8 sm:mt-0">
@@ -224,7 +231,20 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
         </Button>
       </div>
 
-      <TableWrapper distanceEnabled={location !== null}>{rows}</TableWrapper>
+      <Button
+        onClick={() => setFullscreen(!fullscreen)}
+        className="absolute z-50 top-3 right-3"
+      >
+        {fullscreen ? (
+          <Minimize2Icon className="h-4 w-4" />
+        ) : (
+          <MoveUpRight className="h-4 w-4" />
+        )}
+      </Button>
+
+      <TableWrapper fullscreen={fullscreen} distanceEnabled={location !== null}>
+        {rows}
+      </TableWrapper>
     </>
   );
 }
