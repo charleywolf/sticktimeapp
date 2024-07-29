@@ -22,24 +22,18 @@ export default function TableWrapper({
     <>
       <div
         className={clsx(
-          "z-10 bg-neutral-900 top-0 bottom-0 left-0 right-0 absolute",
-          !fullscreen && "hidden"
-        )}
-      ></div>
-      <h1
-        className={clsx(
-          "absolute z-50 top-3 text-3xl xs:text-4xl font-bold text-[#a4e6d0] left-3 xs:left-1/2 xs:transform xs:-translate-x-1/2",
+          "absolute w-full h-16 z-10 bg-neutral-900 text-3xl xs:text-4xl top-0 flex items-center p-3 xs:text-center xs:justify-center font-bold text-[#a4e6d0]",
           !fullscreen && "hidden"
         )}
       >
-        SticktimeApp
-      </h1>
+        <h1>SticktimeApp</h1>
+      </div>
       <div
         className={clsx(
-          "z-20 w-full flex",
+          "z-20 w-full flex bg-neutral-900",
           fullscreen
             ? "absolute top-0 bottom-0 border-t-4 mt-16 overflow-scroll"
-            : "rounded-xl border-4 bg-neutral-900"
+            : "rounded-xl border-4"
         )}
       >
         <div className="p-3 w-full">
