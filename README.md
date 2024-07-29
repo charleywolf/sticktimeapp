@@ -20,6 +20,7 @@ Some reverse engineering may be required.
 - [x] Westchester Skating Academy
 - [x] Brewster Ice Arena
 - [x] Stamford Twin Rinks
+- [x] Chelsea Piers CT
 - [ ] Terry Conners Rink
 - [ ] Hommocks Park Ice Rink
 - [ ] EJ Murray Memorial Skating Center
