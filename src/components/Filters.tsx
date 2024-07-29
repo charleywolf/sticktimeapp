@@ -40,6 +40,7 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
   } | null>(null);
   const [rinkDistance, setRinkDistance] = useState<{ [key: string]: number }>({
     "Ice Hutch": -1,
+    "Chelsea Piers CT": -1,
     WSA: -1,
     Brewster: -1,
     "Twin Rinks": -1,
@@ -53,6 +54,7 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
           WSA: -1,
           Brewster: -1,
           "Twin Rinks": -1,
+          "Chelsea Piers CT": -1,
         };
 
         for (const rink in newRinkDistance) {
@@ -133,7 +135,12 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
               >
                 {sticktime.rink}
               </Link>
-              {rink.onlineRegistration && <OnlineRegistration />}
+              {rink.onlineRegistration !== null && (
+                <OnlineRegistration
+                  notes={rink.onlineRegistration}
+                  spotsLeft={sticktime.spotsLeft}
+                />
+              )}
             </TableCell>
 
             <ClientTime start={sticktime.start} end={sticktime.end} />

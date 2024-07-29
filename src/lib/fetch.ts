@@ -1,10 +1,22 @@
 import brewster from "./rinks/brewster";
+import chelseapiersct from "./rinks/chelseapiersct";
 import icehutch from "./rinks/icehutch";
 import twinrinks from "./rinks/twinrinks";
 import wsa from "./rinks/wsa";
 
-export const rinks: Rink[] = ["Ice Hutch", "WSA", "Brewster", "Twin Rinks"];
-export type Rink = "Ice Hutch" | "WSA" | "Brewster" | "Twin Rinks";
+export const rinks: Rink[] = [
+  "Ice Hutch",
+  "WSA",
+  "Brewster",
+  "Twin Rinks",
+  "Chelsea Piers CT",
+];
+export type Rink =
+  | "Ice Hutch"
+  | "WSA"
+  | "Brewster"
+  | "Twin Rinks"
+  | "Chelsea Piers CT";
 
 export const pageLength = process.env.NODE_ENV === "development" ? 50 : 500; // DaySmart Recreation API
 export interface Sticktime {
@@ -12,6 +24,7 @@ export interface Sticktime {
   end: Date;
   rink: Rink;
   price: number;
+  spotsLeft?: number;
 }
 
 /**
@@ -33,6 +46,7 @@ export default async function fetchSticktimes(): Promise<Sticktime[]> {
     ...(await wsa()),
     ...(await brewster()),
     ...(await twinrinks()),
+    ...(await chelseapiersct()),
   ];
 
   return sticktimes.sort((a, b) => a.start.getTime() - b.start.getTime());
