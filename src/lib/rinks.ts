@@ -1,4 +1,28 @@
-import { Rink } from "./fetch";
+export const rinks: Rink[] = [
+  "Ice Hutch",
+  "WSA",
+  "Brewster",
+  "Twin Rinks",
+  "Chelsea Piers CT",
+];
+
+export type Rink =
+  | "Ice Hutch"
+  | "WSA"
+  | "Brewster"
+  | "Twin Rinks"
+  | "Chelsea Piers CT";
+
+export type RinkDistance = {
+  [key in Rink]: number;
+};
+
+export const getEmptyRinkDistanceArray = (): RinkDistance => {
+  return rinks.reduce((acc: RinkDistance, rink: Rink) => {
+    acc[rink] = -1;
+    return acc;
+  }, {} as RinkDistance);
+};
 
 export const rinkData = {
   "Ice Hutch": {

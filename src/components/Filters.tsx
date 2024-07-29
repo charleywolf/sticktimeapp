@@ -14,10 +14,15 @@ import {
   Minimize2Icon,
   MoveUpRight,
 } from "lucide-react";
-import { Rink, Sticktime, rinks } from "@/lib/fetch";
+import {
+  Rink,
+  RinkDistance,
+  getEmptyRinkDistanceArray,
+  rinks,
+} from "@/lib/rinks";
 import { TableCell, TableRow } from "./ui/table";
 import { isBefore, startOfDay } from "date-fns";
-import rinkMap, { rinkData } from "@/lib/rinkMap";
+import rinkMap, { rinkData } from "@/lib/rinks";
 import { useEffect, useState } from "react";
 
 import { Button } from "./ui/button";
@@ -25,6 +30,7 @@ import ClientTime from "@/components/ClientTime";
 import Link from "next/link";
 import OnlineRegistration from "@/components/OnlineRegistration";
 import { Skeleton } from "./ui/skeleton";
+import { Sticktime } from "@/lib/fetch";
 import TableWrapper from "./TableWrapper";
 import clsx from "clsx";
 import { formatDollars } from "@/lib/utils/time";
@@ -38,24 +44,15 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
     latitude: number;
     longitude: number;
   } | null>(null);
-  const [rinkDistance, setRinkDistance] = useState<{ [key: string]: number }>({
-    "Ice Hutch": -1,
-    "Chelsea Piers CT": -1,
-    WSA: -1,
-    Brewster: -1,
-    "Twin Rinks": -1,
-  });
+  const [rinkDistance, setRinkDistance] = useState<RinkDistance>(
+    getEmptyRinkDistanceArray()
+  );
 
   useEffect(() => {
     if (location) {
       const calculateCoordinates = async () => {
-        const newRinkDistance = {
-          "Ice Hutch": -1,
-          WSA: -1,
-          Brewster: -1,
-          "Twin Rinks": -1,
-          "Chelsea Piers CT": -1,
-        };
+        const newRinkDistance = getEmptyRinkDistanceArray();
+        console.log(newRinkDistance);
 
         for (const rink in newRinkDistance) {
           try {
