@@ -45,6 +45,11 @@ export function isMoreThanAMonthFromNow(date: Date): boolean {
 
 export const TIMEZONE = "America/New_York";
 
+export function formatDateTz(date: Date): string {
+  const dateString = formatInTimeZone(date, TIMEZONE, "MM/dd/yyyy (EEEE)");
+  return dateString;
+}
+
 export function formatDate(date: Date): string {
   // Format date in YYYY-MM-DD format
   const dateString = format(date, "MM/dd/yyyy");

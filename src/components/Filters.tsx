@@ -21,6 +21,7 @@ import {
   rinks,
 } from "@/lib/rinks";
 import { TableCell, TableRow } from "./ui/table";
+import { formatDateTz, formatDollars } from "@/lib/utils/time";
 import { isBefore, startOfDay } from "date-fns";
 import rinkMap, { rinkData } from "@/lib/rinks";
 import { useEffect, useState } from "react";
@@ -33,7 +34,7 @@ import { Skeleton } from "./ui/skeleton";
 import { Sticktime } from "@/lib/fetch";
 import TableWrapper from "./TableWrapper";
 import clsx from "clsx";
-import { formatDollars } from "@/lib/utils/time";
+import { format } from "path";
 import { toast } from "sonner";
 
 export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
@@ -106,8 +107,12 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
   }, [location]);
 
   useEffect(() => {
+    const rows: JSX.Element[] = [];
+
     let count = 0;
-    const rows = sticktimes.map((sticktime) => {
+    let currentDate = "";
+
+    sticktimes.forEach((sticktime) => {
       if (
         !disabledRinks.includes(sticktime.rink) &&
         !isBefore(sticktime.start, startOfDay(new Date()))
@@ -116,7 +121,21 @@ export default function Filters({ sticktimes }: { sticktimes: Sticktime[] }) {
 
         const rink = rinkMap(sticktime.rink); // additional rink data
 
-        return (
+        if (currentDate !== formatDateTz(sticktime.start)) {
+          currentDate = formatDateTz(sticktime.start);
+          rows.push(
+            <TableRow className="bg-zinc-800">
+              <TableCell
+                className="text-center font-bold"
+                colSpan={location !== null ? 6 : 5}
+              >
+                {currentDate}
+              </TableCell>
+            </TableRow>
+          );
+        }
+
+        rows.push(
           <TableRow
             key={
               sticktime.rink +
