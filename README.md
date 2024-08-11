@@ -4,17 +4,16 @@ A web app that aggregates open ice for local NY/CT hockey players.
 
 This may break from time to time as rinks change their sites and APIs. Please make an issue if you notice that happen, I will try to keep this repo up-to-date.
 
-### Pull Requests
+## Contribute
 
-Currently, there are not many rinks available. However, feel free to make a PR and check off another rink.
+If you would like to contribute, the best way would be to add a new rink. See the to-do list for ideas.
 
-Some reverse engineering may be required.
+However, some reverse engineering may be required.
 
-- If they are using Daysmart Recreation, use your browser console to find the api request it is making (use Network tab and disable 3rd party requests only).
-- If the site is not CSR, simply scrape the page.
-- Otherwise, look at the APIs used and attempt to implement.
+- If the site is CSR, use your browser console to find the api request it is making (use Network tab and disable 3rd party requests only).
+- If the site is not CSR, scrape the page directly.
 
-### Rinks
+## Rink List and To-Do
 
 - [x] Ice Hutch
 - [x] Westchester Skating Academy
