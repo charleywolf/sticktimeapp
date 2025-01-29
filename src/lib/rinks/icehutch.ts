@@ -15,25 +15,29 @@ export default async function icehutch(): Promise<Sticktime[]> {
       },
     }
   );
+  try {
+    const events = await result.json();
 
-  const events = await result.json();
+    const sticktimes: (Sticktime | null)[] = events.items.map((event: any) => {
+      if (event.summary.trim() === "Stick Time")
+        return {
+          price: 25,
+          rink: "Ice Hutch",
+          start: new Date(event.start.dateTime),
+          end: new Date(event.end.dateTime),
+        };
+      else return null;
+    });
 
-  const sticktimes: (Sticktime | null)[] = events.items.map((event: any) => {
-    if (event.summary.trim() === "Stick Time")
-      return {
-        price: 25,
-        rink: "Ice Hutch",
-        start: new Date(event.start.dateTime),
-        end: new Date(event.end.dateTime),
-      };
-    else return null;
-  });
+    const nonnullSticktimes = sticktimes.filter(
+      (sticktime) => sticktime !== null
+    );
 
-  const nonnullSticktimes = sticktimes.filter(
-    (sticktime) => sticktime !== null
-  );
-
-  return nonnullSticktimes.filter(
-    (sticktime) => !isMoreThanAMonthFromNow(sticktime.end)
-  );
+    return nonnullSticktimes.filter(
+      (sticktime) => !isMoreThanAMonthFromNow(sticktime.end)
+    );
+  } catch (e: unknown) {
+    console.error("Error fetching ice hutch sticktimes:\n", e);
+    return [];
+  }
 }

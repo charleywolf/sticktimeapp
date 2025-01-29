@@ -10,17 +10,21 @@ export default async function twinrinks(): Promise<Sticktime[]> {
       },
     }
   );
+  try {
+    const events = await result.json();
 
-  const events = await result.json();
+    const sticktimes: Sticktime[] = events.data.map((event: any) => {
+      return {
+        start: new Date(event.attributes.start_gmt),
+        end: new Date(event.attributes.end_gmt),
+        rink: "Twin Rinks",
+        price: 25,
+      };
+    });
 
-  const sticktimes: Sticktime[] = events.data.map((event: any) => {
-    return {
-      start: new Date(event.attributes.start_gmt),
-      end: new Date(event.attributes.end_gmt),
-      rink: "Twin Rinks",
-      price: 25,
-    };
-  });
-
-  return sticktimes;
+    return sticktimes;
+  } catch (e: unknown) {
+    console.error("Error fetching twin rinks sticktimes:\n", e);
+    return [];
+  }
 }

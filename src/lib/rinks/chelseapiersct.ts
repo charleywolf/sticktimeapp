@@ -24,25 +24,30 @@ export default async function chelseapiersct(): Promise<Sticktime[]> {
     }
   );
 
-  const events = await result.json();
+  try {
+    const events = await result.json();
 
-  const sticktimes: Sticktime[] = events.map((event: any) => {
-    if (event.booking.name === "Stick & Puck") {
-      return {
-        start: fromZonedTime(
-          `${event.booking.date}T${event.booking.startTime}:00.000Z`,
-          TIMEZONE
-        ),
-        end: fromZonedTime(
-          `${event.booking.date}T${event.booking.endTime}:00.000Z`,
-          TIMEZONE
-        ),
-        rink: "Chelsea Piers CT",
-        price: 25,
-        spotsLeft: event.booking.classCapacity - event.booking.bookedCount,
-      };
-    }
-  });
+    const sticktimes: Sticktime[] = events.map((event: any) => {
+      if (event.booking.name === "Stick & Puck") {
+        return {
+          start: fromZonedTime(
+            `${event.booking.date}T${event.booking.startTime}:00.000Z`,
+            TIMEZONE
+          ),
+          end: fromZonedTime(
+            `${event.booking.date}T${event.booking.endTime}:00.000Z`,
+            TIMEZONE
+          ),
+          rink: "Chelsea Piers CT",
+          price: 25,
+          spotsLeft: event.booking.classCapacity - event.booking.bookedCount,
+        };
+      }
+    });
 
-  return sticktimes;
+    return sticktimes;
+  } catch (e: unknown) {
+    console.error("Error fetching chelsea piers sticktimes:\n", e);
+    return [];
+  }
 }

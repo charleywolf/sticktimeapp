@@ -3,7 +3,7 @@ import { TIMEZONE, getDateOneMonthFromNow, getTodaysDate } from "../utils/time";
 import { Sticktime } from "../fetch";
 import { fromZonedTime } from "date-fns-tz";
 
-export default async function wsa(): Promise<Sticktime[]> {
+export default async function brewster(): Promise<Sticktime[]> {
   const data = {
     LocationId: "18274",
     Sunday: "true",
@@ -24,27 +24,32 @@ export default async function wsa(): Promise<Sticktime[]> {
     "Resources[0].Id": "-1",
   };
 
-  const result = await fetch(
-    "https://brewstericearena.ezfacility.com/Sessions/FilterResults",
-    {
-      next: {
-        revalidate: 3600,
-      },
-      method: "POST",
-      body: new URLSearchParams(data),
-    }
-  );
+  try {
+    const result = await fetch(
+      "https://brewstericearena.ezfacility.com/Sessions/FilterResults",
+      {
+        next: {
+          revalidate: 3600,
+        },
+        method: "POST",
+        body: new URLSearchParams(data),
+      }
+    );
 
-  const events = await result.json();
+    const events = await result.json();
 
-  const sticktimes: Sticktime[] = events.map((event: any) => {
-    return {
-      start: fromZonedTime(event.start, TIMEZONE),
-      end: fromZonedTime(event.end, TIMEZONE),
-      rink: "Brewster",
-      price: 20,
-    };
-  });
+    const sticktimes: Sticktime[] = events.map((event: any) => {
+      return {
+        start: fromZonedTime(event.start, TIMEZONE),
+        end: fromZonedTime(event.end, TIMEZONE),
+        rink: "Brewster",
+        price: 20,
+      };
+    });
 
-  return sticktimes;
+    return sticktimes;
+  } catch (e: unknown) {
+    console.error("Error fetching brewster sticktimes:\n", e);
+    return [];
+  }
 }
