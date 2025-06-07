@@ -4,14 +4,15 @@ import { Sticktime } from "../fetch";
 import { fromZonedTime } from "date-fns-tz";
 
 export default async function wsa(): Promise<Sticktime[]> {
-  const result = await fetch(
-    `https://apps.daysmartrecreation.com/dash/jsonapi/api/v1/events?cache[save]=false&page[size]=${400}&sort=start&company=wsa&filter[start__gte]=${getTodaysDate()}%2000%3A00%3A00&filter[start__lte]=${getDateOneMonthFromNow()}%2023%3A59%3A59&filter[resource.facility.my_sam_visible]=true&filter[eventType.code__not]=L&filter[eventType.id]=3&filter[resource.facility.id]=1&filterRelations[comments.comment_type]=public&include=homeTeam.league.programType%2CvisitingTeam.league.programType%2Csummary%2Cresource.facility%2CresourceArea%2Ccomments%2CeventType`,
-    {
-      next: {
-        revalidate: 3600,
-      },
-    }
-  );
+  const link = `https://apps.daysmartrecreation.com/dash/jsonapi/api/v1/events?cache[save]=false&page[size]=${400}&sort=end%2Cstart&include=summary%2Ccomments%2Cresource.facility.address%2Cresource.address%2CeventType.product.locations%2ChomeTeam.facility.address%2ChomeTeam.league.season.priorities.memberships%2ChomeTeam.league.season.priorities.activatedBySeasons%2ChomeTeam.programType%2ChomeTeam.product%2ChomeTeam.product.locations%2ChomeTeam.sport&filter[id__in]=155959%2C156090%2C156095%2C155989%2C156078%2C156019%2C156084&filter[start_date__gte]=${getTodaysDate()}&filter[start_date__lte]=${getDateOneMonthFromNow()}&filter[unconstrained]=1&filter[homeTeam.sport_id__in]=20&filterRelations[comments.comment_type]=public&company=wsa`;
+
+  console.log("Fetching WSA sticktimes from:", link);
+
+  const result = await fetch(link, {
+    next: {
+      revalidate: 3600,
+    },
+  });
 
   try {
     const events = await result.json();
