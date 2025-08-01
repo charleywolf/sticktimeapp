@@ -1,37 +1,74 @@
-import { TIMEZONE, getDateOneMonthFromNow, getTodaysDate } from "../utils/time";
+import {
+  TIMEZONE,
+  getDateOneMonthFromNow,
+  getDatesInRange,
+  getTodaysDate,
+} from "../utils/time";
 
 import { Sticktime } from "../fetch";
 import { fromZonedTime } from "date-fns-tz";
 
 export default async function wsa(): Promise<Sticktime[]> {
-  const link = `https://apps.daysmartrecreation.com/dash/jsonapi/api/v1/events?cache[save]=false&page[size]=${400}&sort=end%2Cstart&include=summary%2Ccomments%2Cresource.facility.address%2Cresource.address%2CeventType.product.locations%2ChomeTeam.facility.address%2ChomeTeam.league.season.priorities.memberships%2ChomeTeam.league.season.priorities.activatedBySeasons%2ChomeTeam.programType%2ChomeTeam.product%2ChomeTeam.product.locations%2ChomeTeam.sport&filter[id__in]=155959%2C156090%2C156095%2C155989%2C156078%2C156019%2C156084&filter[start_date__gte]=${getTodaysDate()}&filter[start_date__lte]=${getDateOneMonthFromNow()}&filter[unconstrained]=1&filter[homeTeam.sport_id__in]=20&filterRelations[comments.comment_type]=public&company=wsa`;
+  return getSticktimes(getTodaysDate(), getDateOneMonthFromNow(), 200);
+  // const dates = getDatesInRange(getTodaysDate(), getDateOneMonthFromNow());
+  // const sticktimes =
+  // for (const date of dates) {
+  //   console.log("Fetching WSA sticktimes for date:", date);
+  //   const daysSticktimes = await getDaySticktimes(date);
+  //   console.log(daysSticktimes);
+  //   sticktimes.push(...daysSticktimes);
+  // }
+  // return sticktimes;
+}
 
-  console.log("Fetching WSA sticktimes from:", link);
+async function getSticktimes(
+  startDate: string,
+  endDate: string,
+  size: number
+): Promise<Sticktime[]> {
+  const baseUrl = `https://apps.daysmartrecreation.com/dash/jsonapi/api/v1/events`;
 
-  const result = await fetch(link, {
-    next: {
-      revalidate: 3600,
-    },
-  });
+  const params: Record<string, string> = {
+    "cache[save]": "false",
+    "page[size]": size.toString(),
+    sort: "end,start",
+    include: `summary,comments,resource.facility.address,resource.address,eventType.product.locations,homeTeam.facility.address,homeTeam.league.season.priorities.memberships,homeTeam.league.season.priorities.activatedBySeasons,homeTeam.programType,homeTeam.product,homeTeam.product.locations,homeTeam.sport`,
+    // "filter[id__in]": "",
+    "filter[start_date__gte]": startDate,
+    "filter[start_date__lte]": endDate,
+    "filter[unconstrained]": "1",
+    "filterRelations[comments.comment_type]": "public",
+    company: "wsa",
+  };
+
+  const queryString = new URLSearchParams(params).toString();
+
+  const url = `${baseUrl}?${queryString}`;
 
   try {
-    const events = await result.json();
+    console.log("Fetching WSA sticktimes from link:", url);
+    const result = await fetch(url, {
+      next: {
+        revalidate: 3600,
+      },
+    });
 
-    const sticktimes: (Sticktime | null)[] = events.data.map((event: any) => {
+    const events = await result.json();
+    const summaries = events.included.filter(
+      (element: any) => element.type === "event-summaries"
+    );
+    const sticktimes: (Sticktime | null)[] = summaries.map((event: any) => {
       try {
-        const element = events.included.find(
-          (item: any) => item.id === event.relationships.homeTeam.data.id
-        );
+        const element = event;
 
         if (
-          element &&
-          element.type === "teams" &&
-          element.attributes.name.includes("Stick") &&
-          element.attributes.name.includes("Time")
+          element.attributes &&
+          element.attributes.name &&
+          element.attributes.name.includes("Stick")
         ) {
           return {
-            start: fromZonedTime(event.attributes.start, TIMEZONE),
-            end: fromZonedTime(event.attributes.end, TIMEZONE),
+            start: fromZonedTime(event.attributes.start_date, TIMEZONE),
+            end: fromZonedTime(event.attributes.end_date, TIMEZONE),
             rink: "WSA",
             price: 25,
           };

@@ -21,7 +21,7 @@ export default async function icehutch(): Promise<Sticktime[]> {
     const sticktimes: (Sticktime | null)[] = events.items.map((event: any) => {
       if (event.summary.trim() === "Stick Time")
         return {
-          price: 25,
+          price: 28,
           rink: "Ice Hutch",
           start: new Date(event.start.dateTime),
           end: new Date(event.end.dateTime),

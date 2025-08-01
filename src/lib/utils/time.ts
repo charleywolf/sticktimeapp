@@ -37,6 +37,28 @@ export function getDateOneMonthFromNow(): string {
   return `${year}-${month}-${day}`;
 }
 
+export function getDatesInRange(
+  startDateStr: string,
+  endDateStr: string
+): string[] {
+  const start = new Date(startDateStr);
+  const end = new Date(endDateStr);
+  const dateList: string[] = [];
+
+  if (isNaN(start.getTime()) || isNaN(end.getTime()) || start > end) {
+    return [];
+  }
+
+  const current = new Date(start);
+  while (current <= end) {
+    const isoDate = current.toISOString().split("T")[0]; // "YYYY-MM-DD"
+    dateList.push(isoDate);
+    current.setDate(current.getDate() + 1);
+  }
+
+  return dateList;
+}
+
 export function isMoreThanAMonthFromNow(date: Date): boolean {
   const now = new Date();
   const oneWeekInMilliseconds = 30 * 24 * 60 * 60 * 1000;
